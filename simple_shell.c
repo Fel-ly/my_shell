@@ -70,8 +70,8 @@ int execute(char *arguments[], struct stat *statbuf, char **env)
 	int ac;
 	char **av;
 
-	for (ac = 0; arguments[ac] != NULL; ac++)
-		;
+/*	for (ac = 0; arguments[ac] != NULL; ac++)
+		;*/
 
 	av = split_string(arguments[0], " ", &ac);
 
