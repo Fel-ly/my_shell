@@ -12,10 +12,9 @@
 * Return: value 0
 */
 
-int main(int ac __attribute__((unused)),
-		char *av[] __attribute__((unused)), char **env)
+int main(int ac, char *av[], char **env)
 {
-	char *buf = NULL, *prompt = "Hello:|) ";
+	char *buf[] = NULL, *prompt = "Hello:| ";
 	size_t buf_size = 0;
 	ssize_t bytes;
 	pid_t pid;
@@ -27,7 +26,7 @@ int main(int ac __attribute__((unused)),
 	{
 		if (isatty(STDIN_FILENO) == 0)
 			from_pipe = true;
-		write(STDOUT_FILENO, prompt, 6);
+		write(STDOUT_FILENO, prompt, 8);
 		bytes = getline(&buf, &buf_size, stdin);
 		if (bytes == -1)
 		{
@@ -44,7 +43,7 @@ int main(int ac __attribute__((unused)),
 			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
-			execute(buf, &statbuf, env);
+			execute(buf , &statbuf, env);
 		if (waitpid(pid, &status, 0) == -1)
 		{
 			perror("Error |wait|");
